@@ -1,6 +1,6 @@
-# Changes/Diff Views
+# Change Tracker
 
-## Description
+## Views description
 
 ### Change View
 When writing plugins, particularly those that perform refactoring, it is useful to be able to verify the changes that have been applied to the model.
@@ -18,13 +18,13 @@ A straightforward view that allows two loaded ontologies to be selected for side
 
 ## Features
 
-- Changesets are grouped together as they are applied in P4
+- Changesets are grouped together as they are applied in Protégé
 - History updates on undo/redo
 - Axiom-level comparison of ontologies
 
 
 ## Find the plugins
-Find the Changes and Diff Views under the `Window > Views > Misc views` menu
+Find the Changes and Diff Views under the `Window > Views > Miscellaneous views` menu
 
 ## Author
 Nick Drummond, The University of Manchester
