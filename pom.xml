@@ -91,8 +91,8 @@
                     <instructions>
                         <Bundle-Activator>org.protege.editor.owl.ProtegeOWL</Bundle-Activator>
                         <Bundle-ClassPath>.</Bundle-ClassPath>
-                        <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
-                        <Export-Package>${project.artifactId}*;version=${project.version}</Export-Package>
+                        <Bundle-SymbolicName>org.coode.change;singleton:=true</Bundle-SymbolicName>
+                        <Export-Package>org.coode.change*;version=${project.version}</Export-Package>
                         <Import-Package>
                             org.protege.editor.core.*;version="5.0.0",
                             org.protege.editor.owl.*;version="5.0.0",

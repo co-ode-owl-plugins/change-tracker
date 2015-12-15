@@ -102,6 +102,6 @@ public class AxiomsView extends AbstractOWLViewComponent {
     protected void disposeOWLView() {
         getOWLModelManager().removeListener(listener);
         getOWLModelManager().removeOntologyChangeListener(ontChangeListener);
-        list = null;
+        list.dispose();
     }
 }
