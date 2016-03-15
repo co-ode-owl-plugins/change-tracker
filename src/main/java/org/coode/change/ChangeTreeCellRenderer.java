@@ -11,6 +11,8 @@ import org.protege.editor.owl.ui.renderer.OWLCellRenderer;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.OWLOntologyChange;
 import org.semanticweb.owlapi.model.RemoveAxiom;
+import org.semanticweb.owlapi.model.RemoveImport;
+import org.semanticweb.owlapi.model.RemoveOntologyAnnotation;
 
 /*
 * Copyright (C) 2007, University of Manchester
@@ -34,22 +36,21 @@ import org.semanticweb.owlapi.model.RemoveAxiom;
 * License along with this library; if not, write to the Free Software
 * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
 /**
  * Author: drummond<br>
- * http://www.cs.man.ac.uk/~drummond/<br><br>
+ * http://www.cs.man.ac.uk/~drummond/<br>
+ * <br>
  * <p>
  * The University Of Manchester<br>
  * Bio Health Informatics Group<br>
- * Date: Apr 10, 2008<br><br>
+ * Date: Apr 10, 2008<br>
+ * <br>
  */
 public class ChangeTreeCellRenderer extends OWLCellRenderer {
 
     private final Icon addIcon = Icons.getIcon("yes.gif");
     private final Icon removeIcon = Icons.getIcon("no.gif");
-
     private Object realObject;
-
 
     public ChangeTreeCellRenderer(OWLEditorKit owlEditorKit) {
         super(owlEditorKit);
@@ -57,27 +58,25 @@ public class ChangeTreeCellRenderer extends OWLCellRenderer {
         setWrap(true);
     }
 
-
     @Override
-    public Component getTreeCellRendererComponent(JTree jTree, Object o, boolean b, boolean b1, boolean b2, int i, boolean b3) {
+    public Component getTreeCellRendererComponent(JTree jTree, Object o, boolean b, boolean b1, boolean b2, int i,
+        boolean b3) {
         realObject = o;
-        setStrikeThrough(o instanceof RemoveAxiom);
-        if (o instanceof OWLOntologyChange){
-            o = ((OWLOntologyChange)o).getAxiom();
-        }
-        else if (o instanceof java.util.List){
-            o = "anonymous changeset (" + ((java.util.List<?>)o).size() + ")";
+        setStrikeThrough(o instanceof RemoveAxiom || o instanceof RemoveImport
+            || o instanceof RemoveOntologyAnnotation);
+        if (o instanceof OWLOntologyChange) {
+            o = ((OWLOntologyChange) o).accept(new ChangeDataSelector());
+        } else if (o instanceof java.util.List) {
+            o = "anonymous changeset (" + ((java.util.List<?>) o).size() + ")";
         }
         return super.getTreeCellRendererComponent(jTree, o, b, b1, b2, i, b3);
     }
 
-
     @Override
     protected Icon getIcon(Object object) {
-        if (realObject instanceof AddAxiom){
+        if (realObject instanceof AddAxiom) {
             return addIcon;
-        }
-        else if (realObject instanceof RemoveAxiom){
+        } else if (realObject instanceof RemoveAxiom) {
             return removeIcon;
         }
         return super.getIcon(object);
